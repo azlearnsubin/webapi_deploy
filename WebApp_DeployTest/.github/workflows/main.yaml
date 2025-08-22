@@ -1,0 +1,22 @@
+name: Publish
+on: 
+  workflow_dispatch:
+  push:
+    branches: [main]
+    
+jobs:
+  publish-to-azure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+      - name: Restore
+        run: dotnet restore ./WebApp_DeployTest.sln
+      - name: Build Solution
+        run: dotnet build ./WebApp_DeployTest.sln --configuration Release --no-restore
+      - name: Publish solution
+        run: dotnet publish ./WebApp_DeployTest.sln --configuration Release --no-build
