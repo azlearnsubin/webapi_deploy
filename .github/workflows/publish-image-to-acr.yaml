@@ -6,7 +6,7 @@ on:
 
 env:
   AZURE_CONTAINER_REGISTRY: subinacr
-  CONTAINER_APP_NAME: webapitesst
+  CONTAINER_APP_NAME: webapp-test
   RESOURCE_GROUP: res_grp_1
 
 jobs:
