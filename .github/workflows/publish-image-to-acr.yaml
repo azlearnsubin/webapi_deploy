@@ -36,6 +36,7 @@ jobs:
       - name: Build and push container image to ACR
         uses: docker/build-push-action@v6
         with:
+          context: ./WebApp_DeployTest
           push: true
           tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
           file: WebApp_DeployTest/Dockerfile
