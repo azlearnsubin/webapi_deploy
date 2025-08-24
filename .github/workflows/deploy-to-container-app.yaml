@@ -8,6 +8,7 @@ env:
   AZURE_CONTAINER_REGISTRY: subinacr
   CONTAINER_APP_NAME: az-container-app
   RESOURCE_GROUP: res_grp_1
+  IMAGE_NAME: my-new-img
 
 jobs:
   push-to-acr:
@@ -38,7 +39,7 @@ jobs:
         with:
           context: ./WebApp_DeployTest
           push: true
-          tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
+          tags: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
           file: WebApp_DeployTest/Dockerfile
       
       - name: Azure login
@@ -49,7 +50,7 @@ jobs:
       - name: Deploy to Azure Container Apps
         uses: azure/container-apps-deploy-action@v1
         with:
-          imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_APP_NAME }}:${{ github.sha }}
+          imageToDeploy: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
           resourceGroup: ${{ env.RESOURCE_GROUP }}
           containerAppName: ${{ env.CONTAINER_APP_NAME }}
           environmentVariables: |
