@@ -91,7 +91,7 @@ app.MapGet("/config-snapshot123", (IOptionsSnapshot<AppSettings> snapshot) =>
             Timestamp = DateTime.Now
         };
     })
-    .WithName("GetConfigurationSnapshot")
+    .WithName("GetConfigurationSnapshot123")
     .WithOpenApi();
 
 app.Run();
