@@ -77,6 +77,23 @@ app.MapGet("/config-snapshot", (IOptionsSnapshot<AppSettings> snapshot) =>
     .WithName("GetConfigurationSnapshot")
     .WithOpenApi();
 
+app.MapGet("/config-snapshot123", (IOptionsSnapshot<AppSettings> snapshot) =>
+    {
+        var appSettings = snapshot.Value;
+        return new
+        {
+            AppName = appSettings.AppName,
+            Version = appSettings.Version,
+            Environment = appSettings.Environment,
+            DatabaseConnection = appSettings.DatabaseConnection,
+            ApiBaseUrl = appSettings.ApiBaseUrl,
+            ConfigurationType = "IOptionsSnapshot (Scoped)",
+            Timestamp = DateTime.Now
+        };
+    })
+    .WithName("GetConfigurationSnapshot")
+    .WithOpenApi();
+
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
